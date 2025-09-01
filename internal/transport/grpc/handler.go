@@ -43,16 +43,18 @@ func (h *Handler) CreateTask(ctx context.Context, req *taskpb.CreateTaskRequest)
 	}, nil
 }
 
-func (h *Handler) GetTask(ctx context.Context, req *taskpb.GetTaskRequest) (*taskpb.Task, error) {
+func (h *Handler) GetTask(ctx context.Context, req *taskpb.GetTaskRequest) (*taskpb.GetTaskResponse, error) {
 	t, err := h.svc.GetTask(req.Id)
 	if err != nil {
 		return nil, err
 	}
-	return &taskpb.Task{
-		Id:     uint32(t.ID),
-		UserId: t.UserID,
-		Title:  t.Title,
-		IsDone: t.IsDone,
+	return &taskpb.GetTaskResponse{
+		Task: &taskpb.Task{
+			Id:     uint32(t.ID),
+			UserId: t.UserID,
+			Title:  t.Title,
+			IsDone: t.IsDone,
+		},
 	}, nil
 }
 
