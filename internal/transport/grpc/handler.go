@@ -41,17 +41,18 @@ func (h *Handler) GetTask(ctx context.Context, req *taskpb.Task) (*taskpb.Task, 
 }
 
 func (h *Handler) UpdateTask(ctx context.Context, req *taskpb.UpdateTaskRequest) (*taskpb.UpdateTaskResponse, error) {
-	t, err := h.svc.UpdateTask(task.Task{
+	t := task.Task{
 		Title: req.Title,
-	})
+	}
+	t.ID = uint(req.Id)
+	updatedTask, err := h.svc.UpdateTask(t)
 	if err != nil {
 		return nil, err
 	}
-	t.ID = uint(req.Id) // Устанавливаем ID для обновления
 	return &taskpb.UpdateTaskResponse{
 		Task: &taskpb.Task{
-			Id:    uint32(t.ID),
-			Title: t.Title,
+			Id:    uint32(updatedTask.ID),
+			Title: updatedTask.Title,
 		},
 	}, nil
 }
