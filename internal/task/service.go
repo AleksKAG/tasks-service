@@ -28,3 +28,8 @@ func (s *Service) ListTasks(page, pageSize int) ([]Task, error) {
 	offset := (page - 1) * pageSize
 	return s.repo.List(offset, pageSize)
 }
+
+func (s *Service) ListTasksByUser(userID uint32, page, pageSize int) ([]Task, error) {
+	offset := (page - 1) * pageSize
+	return s.repo.ListByUser(userID, offset, pageSize)
+}

@@ -4,5 +4,7 @@ import "gorm.io/gorm"
 
 type Task struct {
 	gorm.Model
-	Title string
+	UserID uint32
+	Title  string
+	IsDone bool
 }

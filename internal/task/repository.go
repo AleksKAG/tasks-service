@@ -23,7 +23,9 @@ func (r *Repository) Get(id uint32) (Task, error) {
 
 func (r *Repository) Update(t Task) (Task, error) {
 	result := r.db.Model(&Task{}).Where("id = ?", t.ID).Updates(map[string]interface{}{
-		"title": t.Title,
+		"user_id": t.UserID,
+		"title":   t.Title,
+		"is_done": t.IsDone,
 	})
 	if result.Error != nil {
 		return Task{}, result.Error
@@ -38,5 +40,11 @@ func (r *Repository) Delete(id uint32) error {
 func (r *Repository) List(offset, limit int) ([]Task, error) {
 	var tasks []Task
 	result := r.db.Offset(offset).Limit(limit).Find(&tasks)
+	return tasks, result.Error
+}
+
+func (r *Repository) ListByUser(userID uint32, offset, limit int) ([]Task, error) {
+	var tasks []Task
+	result := r.db.Where("user_id = ?", userID).Offset(offset).Limit(limit).Find(&tasks)
 	return tasks, result.Error
 }
