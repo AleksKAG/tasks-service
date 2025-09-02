@@ -21,7 +21,7 @@ func NewHandler(svc *task.Service, uc userpb.UserServiceClient) *Handler {
 
 func (h *Handler) CreateTask(ctx context.Context, req *taskpb.CreateTaskRequest) (*taskpb.CreateTaskResponse, error) {
 	// Проверка существования пользователя
-	if _, err := h.userClient.GetUser(ctx, &userpb.User{Id: req.UserId}); err != nil {
+	if _, err := h.userClient.GetUser(ctx, &userpb.GetUserRequest{Id: req.UserId}); err != nil {
 		return nil, fmt.Errorf("user %d not found: %w", req.UserId, err)
 	}
 	// Создание задачи
