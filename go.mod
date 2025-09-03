@@ -3,7 +3,7 @@ module github.com/AleksKAG/tasks-service
 go 1.24.5
 
 require (
-	github.com/AleksKAG/project-protos v1.1.1
+	github.com/AleksKAG/project-protos v1.1.2
 	google.golang.org/grpc v1.74.2
 	gorm.io/gorm v1.25.10
 )
