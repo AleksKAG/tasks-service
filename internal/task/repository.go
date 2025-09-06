@@ -10,30 +10,30 @@ func NewRepository(db *gorm.DB) *Repository {
 	return &Repository{db: db}
 }
 
-func (r *Repository) Create(t Task) (Task, error) {
-	result := r.db.Create(&t)
-	return t, result.Error
+func (r *Repository) Create(task Task) (Task, error) {
+	result := r.db.Create(&task)
+	return task, result.Error
 }
 
-func (r *Repository) Get(id uint32) (Task, error) {
-	var t Task
-	result := r.db.First(&t, id)
-	return t, result.Error
+func (r *Repository) Get(id uint) (Task, error) {
+	var task Task
+	result := r.db.First(&task, id)
+	return task, result.Error
 }
 
-func (r *Repository) Update(t Task) (Task, error) {
-	result := r.db.Model(&Task{}).Where("id = ?", t.ID).Updates(map[string]interface{}{
-		"user_id": t.UserID,
-		"title":   t.Title,
-		"is_done": t.IsDone,
+func (r *Repository) Update(task Task) (Task, error) {
+	result := r.db.Model(&task).Updates(Task{
+		UserID: task.UserID,
+		Title:  task.Title,
+		IsDone: task.IsDone,
 	})
 	if result.Error != nil {
 		return Task{}, result.Error
 	}
-	return t, nil
+	return task, nil
 }
 
-func (r *Repository) Delete(id uint32) error {
+func (r *Repository) Delete(id uint) error {
 	return r.db.Delete(&Task{}, id).Error
 }
 
@@ -43,7 +43,7 @@ func (r *Repository) List(offset, limit int) ([]Task, error) {
 	return tasks, result.Error
 }
 
-func (r *Repository) ListByUser(userID uint32, offset, limit int) ([]Task, error) {
+func (r *Repository) ListByUser(userID uint, offset, limit int) ([]Task, error) {
 	var tasks []Task
 	result := r.db.Where("user_id = ?", userID).Offset(offset).Limit(limit).Find(&tasks)
 	return tasks, result.Error

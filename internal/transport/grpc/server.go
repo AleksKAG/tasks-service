@@ -8,6 +8,7 @@ import (
 	userpb "github.com/AleksKAG/project-protos/proto/user"
 	"github.com/AleksKAG/tasks-service/internal/task"
 	"google.golang.org/grpc"
+	"google.golang.org/grpc/reflection"
 )
 
 func RunGRPC(svc *task.Service, uc userpb.UserServiceClient) error {
@@ -18,6 +19,10 @@ func RunGRPC(svc *task.Service, uc userpb.UserServiceClient) error {
 	grpcSrv := grpc.NewServer()
 	handler := NewHandler(svc, uc)
 	taskpb.RegisterTaskServiceServer(grpcSrv, handler)
+
+	// включаем server reflection
+	reflection.Register(grpcSrv)
+
 	log.Println("Server running at :50052")
 	return grpcSrv.Serve(lis)
 }

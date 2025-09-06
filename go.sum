@@ -1,5 +1,5 @@
-github.com/AleksKAG/project-protos v1.1.2 h1:OGksBB7aXvtSosw15I1k3wDwGpMsE1SRDtcnMql9Wzo=
-github.com/AleksKAG/project-protos v1.1.2/go.mod h1:bJ1aMVqhljBy6QAshJlL6286fCQtXrcwOEu1YNqutR8=
+github.com/AleksKAG/project-protos v1.0.3 h1:pl9Dtu69gw3wcLZH6383jlgu0g02Vfcz35xdT4ccKI4=
+github.com/AleksKAG/project-protos v1.0.3/go.mod h1:bJ1aMVqhljBy6QAshJlL6286fCQtXrcwOEu1YNqutR8=
 github.com/go-logr/logr v1.4.3 h1:CjnDlHq8ikf6E492q6eKboGOC0T8CDaOvkHCIg8idEI=
 github.com/go-logr/logr v1.4.3/go.mod h1:9T104GzyrTigFIr8wt5mBrctHMim0Nb2HLGrmQ40KvY=
 github.com/go-logr/stdr v1.2.2 h1:hSWxHoqTgW2S2qGc0LTAI563KZ5YKYRhT3MFKZMbjag=
